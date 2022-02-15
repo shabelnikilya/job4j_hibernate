@@ -16,6 +16,7 @@
         <property name="show_sql">true</property>
         <property name="format_sql">true</property>
         <property name="use_sql_comments">true</property>
+        <property name="hibernate.jdbc.time_zone">Europe/Moscow</property>
 
         <mapping class="ru.job4j.model.Car" />
         <mapping class="ru.job4j.model.Brand" />
@@ -23,5 +24,7 @@
         <mapping class="ru.job4j.model.Author" />
         <mapping class="ru.job4j.lazy.ModelCar" />
         <mapping class="ru.job4j.lazy.Mark" />
+        <mapping class="ru.job4j.model.Product" />
+        <mapping class="ru.job4j.model.Candidate" />
     </session-factory>
 </hibernate-configuration>
