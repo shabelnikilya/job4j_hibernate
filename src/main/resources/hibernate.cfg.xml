@@ -26,5 +26,7 @@
         <mapping class="ru.job4j.lazy.Mark" />
         <mapping class="ru.job4j.model.Product" />
         <mapping class="ru.job4j.model.Candidate" />
+        <mapping class="ru.job4j.model.DatabaseVacancies" />
+        <mapping class="ru.job4j.model.Vacancy" />
     </session-factory>
 </hibernate-configuration>

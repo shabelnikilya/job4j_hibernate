@@ -7,6 +7,9 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.query.Query;
 import ru.job4j.model.Candidate;
+import ru.job4j.model.DatabaseVacancies;
+import ru.job4j.model.Vacancy;
+import java.util.Set;
 
 public class RunCandidates {
     public static void main(String[] args) {
@@ -16,7 +19,7 @@ public class RunCandidates {
             SessionFactory sf = new MetadataSources(registry).buildMetadata().buildSessionFactory();
             Session session = sf.openSession();
             session.beginTransaction();
-            saveCandidates(session);
+            joinTable(session);
             session.getTransaction().commit();
             session.close();
         } catch (Exception e) {
@@ -73,5 +76,24 @@ public class RunCandidates {
                         + "from Candidate c where c.id = :idParam ");
         query.setParameter("idParam", 2);
         query.executeUpdate();
+    }
+
+    public static void addCandidateWithVacancy(Session session) {
+            DatabaseVacancies d = new DatabaseVacancies("hh",
+                    Set.of(new Vacancy("грузчик"),
+                            new Vacancy("Маркетолог")));
+            session.save(d);
+            Candidate candidate = new Candidate("Roma", "Rosenergoatom", 70000, d);
+            session.save(candidate);
+    }
+
+    public static void joinTable(Session session) {
+        Query query = session.createQuery(
+                "select distinct c from Candidate c "
+                        + "join fetch c.databaseVacancies cd "
+                        + "join fetch cd.vacancies", Candidate.class);
+        for (Object candidate : query.list()) {
+            System.out.println(candidate);
+        }
     }
 }

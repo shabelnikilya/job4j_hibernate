@@ -12,6 +12,8 @@ public class Candidate {
     private String name;
     private String experience;
     private int salary;
+    @OneToOne
+    private DatabaseVacancies databaseVacancies;
 
     public Candidate() {
     }
@@ -20,6 +22,13 @@ public class Candidate {
         this.name = name;
         this.experience = experience;
         this.salary = salary;
+    }
+
+    public Candidate(String name, String experience, int salary, DatabaseVacancies databaseVacancies) {
+        this.name = name;
+        this.experience = experience;
+        this.salary = salary;
+        this.databaseVacancies = databaseVacancies;
     }
 
     public int getId() {
@@ -53,6 +62,15 @@ public class Candidate {
     public void setSalary(int salary) {
         this.salary = salary;
     }
+
+    public DatabaseVacancies getDatabaseVacancies() {
+        return databaseVacancies;
+    }
+
+    public void setDatabaseVacancies(DatabaseVacancies databaseVacancies) {
+        this.databaseVacancies = databaseVacancies;
+    }
+
 
     @Override
     public boolean equals(Object o) {
