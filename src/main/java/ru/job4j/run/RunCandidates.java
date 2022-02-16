@@ -49,7 +49,9 @@ public class RunCandidates {
             Query queryId = session.createQuery("from Candidate c where c.id = 2");
             System.out.println(queryId.uniqueResult());
             Query queryName = session.createQuery("from Candidate c where c.name = 'Roma'");
-            System.out.println(queryName.uniqueResult());
+            for (Object candidate : queryName.list()) {
+                System.out.println(candidate);
+            }
     }
 
     public static void updateCandidates(Session session) {
